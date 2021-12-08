@@ -1,7 +1,9 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
+package src;
 
 /**
  *
@@ -9,8 +11,8 @@
  */
 public class Question {
     
-    String text;
-    String[] answers;
+    String text;        //question
+    String[] answers;   //all answers
     int[] randOrder;
     
     public Question(String q, String gA, String rA, String hA, String sA){
@@ -22,6 +24,9 @@ public class Question {
         answers[2] = hA;
         answers[3] = sA;
         //randOrder = new int[4];
+    }
+    public Question(){
+        
     }
     
     // returns the answers in a random order
@@ -40,12 +45,4 @@ public class Question {
     public int getHouse(int choosenAnswer ) {
         return randOrder[choosenAnswer];
     }
-    
-    
-    
-    
-    
-    
-    
-    
 }
