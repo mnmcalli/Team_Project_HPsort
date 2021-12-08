@@ -1,3 +1,9 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package src;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -8,19 +14,37 @@ public class Quiz {
 	Random rand = new Random();
 	int [] score = new int[4]; //0 = G, 1 = R,  2 = H, 3 = S
 	int numberOfQs = 9;
-	String[][] questions = new String[numberOfQs][5];
+	//String[][] questions = new String[numberOfQs][5];
+        String displayQuestion;
+        String displayAnswer1;
+        String displayAnswer2;
+        String displayAnswer3;
+        String displayAnswer4;
+        
+        Question[] questions = new Question[numberOfQs];
+        
 	public Quiz() {
 		
 	}
-	public void read(String fileName, int q) {
-		File f = new File(fileName);
+	public void readQuestion(String questionFile, String gAnswerFile, String hAnswerFile, String rAnswerFile, String sAnswerFile) {
+		File f = new File(questionFile);
+                File g = new File(gAnswerFile);
+                File h = new File(hAnswerFile);
+                File r = new File(rAnswerFile);
+                File s = new File(sAnswerFile);
 		try {
+                        Question placeholder = new Question();
 			Scanner scanner = new Scanner(f);
-			for(int i = 0; i < questions.length; i++) {
-				if(scanner.hasNextLine()) {
-					questions[i][q] = scanner.nextLine();
-					//System.out.println(questions[i][q]);		//used for debugging
+                        Scanner gAns = new Scanner(g);
+                        Scanner hAns = new Scanner(h);
+                        Scanner rAns = new Scanner(r);
+                        Scanner sAns = new Scanner(s);
+			for(int i = 0; i < numberOfQs; i++) {
+				if(scanner.hasNextLine() && gAns.hasNextLine() && hAns.hasNextLine() && rAns.hasNextLine() && sAns.hasNextLine()) {
+					//questions[i][q] = scanner.nextLine();
+                                        placeholder = new Question(scanner.nextLine(), gAns.nextLine(), rAns.nextLine(), hAns.nextLine(), sAns.nextLine());  //g, r, h, s
 				}
+                            questions[i] = placeholder;
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -28,16 +52,21 @@ public class Quiz {
 	}
 	public void display() {
 		for(int i = 0; i < numberOfQs; i++) {
-			System.out.println(questions[i][0]);
-			for(int q = 1; q < 5; q++) {
-				System.out.println((q) + ": " + questions[i][q]);
+			displayQuestion = questions[i].text;
+                        displayAnswers(questions[i].randomizedAnswers());
 			}
 			Scanner scan = new Scanner(System.in);
 			int answer = scan.nextInt();
 			//assumes perfect input because it might be buttons, so no try/catch
 			score[(answer - 1)]++;
-		}
-	}
+        }
+	
+        public void displayAnswers(String[] answers){
+            displayAnswer1 = answers[0];
+            displayAnswer2 = answers[1];
+            displayAnswer3 = answers[2];
+            displayAnswer4 = answers[3];
+        }
 	private boolean confirmTwoWay() {
 		boolean confirm = false;
 		if(score[0] == 4) {
