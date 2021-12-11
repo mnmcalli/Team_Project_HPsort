@@ -1,5 +1,7 @@
 Team_Project_HPsort
 
+Authors: Jessica Smither, Brittany Hooley, and Mikki McAllister
+
 This java program is based off of the book and movie series Harry Potter. 
 The objective of the program is to place a user in a Hogwarts House that is best suited for the user.
 The program allows a user to go through a series of questions and choose an answer that best describes them.
